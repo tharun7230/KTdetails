@@ -1,0 +1,39 @@
+<html>
+    <style>
+        /* This is just a sample css. Should be configured as per FI needs */
+        iframe {
+            border: 4px red solid;
+            border-radius: 5px;
+            border-style: double;
+            overflow: hidden;
+            width: 95%;
+            height: 95%;
+            position: absolute;
+        }
+    </style>
+
+    <body onload="document.forms['ztkSsoForm'].submit()">
+        <iframe src="" id="ztkFrame" name="ztkLaunchFrame" frameborder="0"></iframe>
+
+        <!-- SSO_JWE_URL Example: https://ztk01.arrow.jhapaycenter.com/sso/jwe -->
+        <form method='POST' name="ztkSsoForm" action='https://ztk01.arrow.jhapaycenter.com/sso/jwe'
+            enctype='application/json' target="ztkLaunchFrame"> 
+            <input name="fiId" value="ja1" hidden /> <!-- Example: jh7 -->
+            <input name="pid" value="q2" hidden /> <!-- Example: Q2 -->
+            <input name="activity" value="request" hidden /> <!-- Refer Activity Parameters section -->
+            <input name="token" hidden value="ZXlKbGJtTWlPaUpCTVRJNFEwSkRMVWhUTWpVMklpd2lZV3huSWpvaVVsTkJMVTlCUlZBaUxDSnJhV1FpT2lKNWMxUmlSeTFPV0RaQlQybExSRFJPWVVsWmExbDNjbVJLZFhKQ1QySk5jRGxwYkdsa2FFTjVVRTFySW4wLlJ0MnhPZ2otZS1HZEVDNF9UNTNUR3JuSExBcUhqVzNPNXN1dUV6aVBHd0oxeHNHS19hMnZHaExlSHFCakZxRzdtYkltVWVtT2d0LVRlTWYybnV0Y1NiWjdqT001b0FXUXNkdW43SjlBRnJYUXdnMi1SS3d0TkNwaHhiNkZuWjZ0anFpWkxCdWZydVFXWFljUmNFX1d3ZVdiRVVWNkMydDNZaFdxRmR5NEJ3enQ2NXNyWTREN21zVkVoYlFNZG9fSUpCYlBrOEREekh6LThFVWJYZUtVOE1vNXpsbnBxSUdFT2o4WHpwejlCS2JUTWxUdkpsT2N3N05BenJPMVd4aHloUmU0MnNidk5rWTNydHpQbTh0OWFKeF9pcGZnbTQ5blF1dklmTzdxVVVUWUpMY2RrcUxXOTFqQm5BOW1zMGptSjBkUGpJUk9sUjE1b2ZjLU9aYlF4Zy5zSU90MzNsOTZHMUF4eTBPRG9QcFVBLjJJa1BBSDFZTWFTUUFZV0lLd1RfMFR5eDlDNXFid3FYOVpXZzVoLXE5WjlCeFBHMVhad2h2MGJMTW5yQjNtcms2TDFMQ2QwVTYza3JnaWUyRXRfRVMzNG5FQ294RjJWWjZ1SUZJMGNmOHkyNGRtNUM4ZTBBWS1RUV9SWGk0U0RHTXVmMTYxNDJMdGZGMURIRzVvNDRpV2R1aV82YVBGZWhKMEFKMzV0Y3RaNFc1UzBJZkN3RHZDVFNSM1V5R05OXzVSOVQ1VjllaFdRU0QxeTZ0UXRqblEuei1CVmI5WlZ3OFB4WmdzWXZuZUdQZw==" /> <!-- Generated JWE token -->
+        </form>
+    </body>
+
+    <script> // Listener to close the iFrame
+        function closeIFrame() {
+            var iFrame= document.getElementById("ztkFrame");
+            iFrame.style.display = "none";
+        }
+        window.addEventListener("message", (event) => {
+            if(event.data.event === "jha:ztk:message.frame.close") {
+                closeIFrame();
+            }
+        }, false);
+    </script>
+</html>
