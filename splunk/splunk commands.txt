@@ -1,0 +1,22 @@
+Splunk basic commands
+
+
+mixed 
+
+source="nginx_json_logs.txt" host="MSI" sourcetype="_json" | stats count by remote_ip | dedup remote_ip | where count > 50 | sort - count desc
+
+Finding
+
+source="F:\\splunk testing\\nginx_json_logs.txt" host="MSI" sourcetype="_json"  remote_ip = 0.0.0.0
+
+stats
+
+source="nginx_json_logs.txt" host="MSI" sourcetype="_json" | stats count by agent
+
+
+source="nginx_json_logs.txt" host="MSI" sourcetype="_json" | table remote_ip
+
+
+rename
+
+source="nginx_json_logs.txt" host="MSI" sourcetype="_json" | table remote_ip, agent  , request | dedup remote_ip | rename remote_ip as "Ip address"
